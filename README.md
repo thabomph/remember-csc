@@ -2,12 +2,12 @@
 
 A quick recap of Computer Science fundamentals for those moments when you can't quite remember the basics and don't have enough time to look through multiple sources. This recap also includes some coding examples (in JavaScript).
 
-📐 [Maths Recap](#maths-recap)
-📈 [Algorithmic Complexity](#algorithmic-complexity)
-​🛠️​ [Algorithms](#algorithms)
-🏗 [Data Structures](#data-structures)
+1. 📐 [Maths Recap](#maths-recap)
+2. 📈 [Algorithmic Complexity](#algorithmic-complexity)
+3. ​🛠️​ [Algorithms](#algorithms)
+4. 🏗 [Data Structures](#data-structures)
 
-> ⚠️ *This repository serves as a starting point for deeper research into each of the topics and is not an exhaustive overview of the topics discussed. Contributions are welcomed to address any mistakes or extend on the topics covered.*
+⚠️ *This repository serves as a starting point for deeper research into each of the topics and is not an exhaustive overview of the topics discussed. Contributions are welcomed to address any mistakes or extend on the topics covered.*
 
 ---
 

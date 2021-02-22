@@ -5,7 +5,14 @@ A quick recap of Computer Science fundamentals for those moments when you can't 
 1. 📐 [Maths Recap](#maths-recap)
 2. 📈 [Algorithmic Complexity](#algorithmic-complexity)
 3. ​🛠️​ [Algorithms](#algorithms)
+   * [Searching Algorithms](#searching-algorithms)
+   * [Sorting Algorithms](#sorting-algorithms)
 4. 🏗 [Data Structures](#data-structures)
+   * [Strings](#strings)
+   * [Linked Lists](#linked-lists)
+   * [Hash Tables / Maps](#hash-tables--maps)
+   * [Graphs](#graphs)
+   * [Trees](#trees)
 
 ⚠️ *This repository serves as a starting point for deeper research into each of the topics and is not an exhaustive overview of the topics discussed. Contributions are welcomed to address any mistakes or extend on the topics covered.*
 
@@ -70,7 +77,7 @@ log_2(8) = 3
 = 1 0 0 0 0 0 1 0 1 1
 ```
 
-##### Binary Arithmetic
+##### Binary Addition
 
 Two binary numbers can be added similar to decimal number addition by carrying the sum numbers in related positions, however there are three rules that need to be followed when adding two binary numbers: 
 
@@ -139,6 +146,68 @@ static Integer[] binarySum(Integer[] a, Integer[] b) {
 }
 ```
 
+#### Binary Multiplication
+
+Multiplicaiton of binary numbers can be done in a similar way to that of decimal numbers, except that this is done with only two digits (0 and 1). The rules to follow for this type of multiple are those of binary AND i.e.:
+
+1. Multiplication by zero results in zero
+
+```matlab
+ 0 × 1 = 0
+```
+
+2. Multiplication by one results in the multiplicand value
+
+```matlab
+1 × 1 = 1
+```
+
+The multiplication of a binary number with ***n*** bits by a binary number with ***m*** bits results in a binary number with ***n+m*** bits.
+
+**Example:** Multiplication of two numbers
+
+```matlab
+% Decimal
+    12
+  x 10
+  ----
+     0 %12*0
+ + 12  %12*1
+ =====
+   120 %sum of each column 
+
+% Binary
+      1100
+    x 1010
+    ------
+      0000
+     1100
+    0000
+ + 1100
+  ========
+  01111000
+```
+
+#### Binary Subtraction
+
+Similar to decimal subtraction, however borrowing is such that $0 - 1 = 1 with a borrow of 1$. This borrowed value is then subtracted from the next value to bu subtracted.
+
+**Example:** Subtraction of two numbers
+
+```matlab
+%Example 1
+  1001
+-  101
+------
+   100
+
+%Example 2
+  1000
+-  111
+------
+  0001
+```
+
 ### Probability
 
 The likelihood that an event is to occur, or how likely it is that a proposition is true. i.e. The probability of an event is a number between 0 and 1, where, roughly speaking, 0 indicates impossibility of the event and 1 indicates certainty.
@@ -147,7 +216,20 @@ Probability can be defined as $x/n$ where $x$ is the number of successful events
 
 ### Permutations
 
-An arrangement of a set's members into a **sequence or linear order**, or if the set is already ordered, a rearrangement of its elements.  There are $n!$ permutations of length $n$ in a set of $n$ numbers, and $m × n!$ permutations of length $n$ in a set of $m$ numbers. Permutation operations have a [time complexity](#algorithmic-complexity) of $O(n!)$.
+An arrangement of a set's members into a **sequence or linear order**, or if the set is already ordered, a rearrangement of its elements. e.g. (3,2,1) and (1,2,3) are permutations of each other, similarly“abcd” and “dabc” are permutation of each other.
+
+There are $n!$ permutations of length $n$ in a set of $n$ numbers, and $m × n!$ permutations of length $n$ in a set of $m$ numbers. Permutation operations have a [time complexity](#algorithmic-complexity) of $O(n!)$.
+
+**Example:** Permutations of (1, 2, 3) of length 3:
+
+```
+(1, 2, 3)
+(1, 3, 2)
+(2, 1, 3)
+(2, 3, 1)
+(3, 2, 1)
+(3, 1, 2)
+```
 
 **Example:** Permutations of (1, 2, 3) of length 2:
 
@@ -595,10 +677,10 @@ static ArrayList<Integer> mergeSort(ArrayList<Integer> list) {
   static ArrayList<Integer> mergeSortMerger(ArrayList<Integer> left, ArrayList<Integer> right) {
     ArrayList<Integer> sorted = new ArrayList<Integer>();
     while((left.size() > 0) && (right.size()) > 0) {
-      if(left.get(0) < right.get(0)) {
-        sorted.add(left.remove(0));
+      if(left.getFirst() < right.getFirst()) {
+        sorted.add(left.removeFirst());
       }else {
-        sorted.add(right.remove(0));
+        sorted.add(right.removeFirst());
       }
     }
     sorted.addAll(left);  
@@ -638,9 +720,43 @@ function quickSort(list) {
 }
 ```
 
+#### Bucket Sort
+
+* It sorts the elements by first grouping the individual values into some finite set and then sorting the elements according to their increasing/decreasing order across the groups.
+* Radix sort can be applied to data that can be sorted lexicographically, be they integers, words, punch cards, playing cards, or the mail.
+* Average time complexity of the bucket sort algorithm is $0(kn)$, where *n* is the number of elements and *k* is the number of passes of the sorting algorithm.
+
+**Example**
+
+```
+bucketSort(arr[], n)
+1. Create a bucket list/array of n empty buckets
+2. For every array element arr[i], insert arr[i] into bucket[n × array[i]]
+3. Sort individual
+4. Concatenate all sorted buckets
+```
+
 ---
 
 ## Data Structures
+
+### Strings
+
+* Strings are a sequence of characters. These can include alphanumeric and special characters, which are grouped into a character set.
+* Character encoding is used to map these characters to a binary format that is interpreted by a computer. It usually does this by pairing numbers with characters.
+* There are many different types of character encodings that have been used over time, however the commonly used include:
+  * **ASCII** was the first character encoding standard. It is a code for representing English alphabetic, numeric, or special character, with each letter assigned a number from 0 to 127. Here each character is represented with a 7-bit binary number. (e.g. the lowercase character *e* is represented as the number 101).
+  * **Unicode** is a standard used in most operating systems used in computers today as it can handle characters for almost all modern languages. Unicode extends on ASCII by providing support for more characters through various implementations - the most commonly used encodings are UTF-8 and UTF-16.
+    * **UTF-8** can represent any character in the Unicode standard, is backwards compatible with ASCII and it is the preferred encoding for e-mail and web pages. A character in UTF8 can be from 1 to 4 bytes long, therefore each letter assigned a number from 0 to 255. Here each character
+    * **UTF-16** is used in major operating systems and environments, as it is a variable-length character encoding for Unicode, capable of encoding the entire Unicode repertoire (over a million characters). It is however not backward compatible with ASCII and is thus not commonly used on the web.
+
+**Example:**
+
+```java
+/* Java */
+int asciiA = 'a';  //97
+int unicodeŚ = 'Ś'; // 364
+```
 
 ### Linked Lists
 
@@ -810,7 +926,7 @@ These determine how to search/traverse through a graph
 
 ##### Depth First Search (DFS)
 
-* Involves traversing from the root node going down from left to right, deep into the graph from until hitting each leaf, then moving back up and down to the next branch
+* Involves traversing from the root node going down from left to right, deep into the graph until hitting each leaf, then moving back up and down to the next branch
 * Requires tracking all visited nodes in order to avoid an infinite loop where the graph is cyclical
 * This has a runtime of $O(n)$
 
@@ -840,13 +956,27 @@ These determine how to search/traverse through a graph
 visited = new Map()
 function dfs(visited, node) {
   if(!visited.has(node)) {
-    print(node.value)
+    console.log("Visiting " + node.value)
     visited.set(node, node.value)
     for(child in node.childred) {
       dfs(visited, child)
     }
   }
 }
+```
+
+```java
+  /* Java */
+  static void dfs(HashSet<Node> visited, Node node) {
+    if(!visited.contains(node)) {
+      System.out.println("Visiting " + node.value);
+      visited.add(node);
+
+      for(Node child : node.children) {
+        dfs(visited, child);
+      }
+    }
+  }
 ```
 
 ##### Breadth First Search (BFS)
@@ -884,20 +1014,40 @@ function bfs(root) {
   toVisit = []
 
   toVisit.unshift(root)
-  visited.set(root, root.value)
 
   while(toVisit !== []) {
     node = toVisit.shift() // dequeue
     print(node.val)
+    visited.set(node, node.value)
 
     for(child in node.children) {
       if(!visited.has(child)) {
         toVisit.unshift(child)
-        visited.set(child, child.value)
       }
     }
   }
 }
+```
+
+```java
+  /** Java */
+  static void bfs(Node root) {
+    HashSet<Node> visited = new HashSet<Node>();
+    LinkedList<Node> visitQueue = new LinkedList<Node>();
+    visitQueue.add(root);
+
+    while(visitQueue.size() > 0) {
+      Node node = visitQueue.removeFirst();
+      System.out.println("Visiting " + node.value);
+      visited.add(node);
+
+      for(Node child : node.children) {
+        if(!visited.contains(child)) {
+          visitQueue.add(child);
+        }
+      }
+    }
+  }
 ```
 
 ---
@@ -1070,11 +1220,32 @@ The runtime of a Binary Search Tree is $O(n)$ in the worst case (e.g. where the 
 Binary trees with the following properties:
 
 * Every level of the binary tree (Except the edge/last level) has to be full / balanced
-* The Edge/last level of the binary tree must be filled from left to right
+* The Edge/last level of the binary tree must be filled from left to right. i.e. Right child could be missing so long as left child is present.
 
 The hight of a complete binary tree is logarithmic to the number of node in the tree i.e. $O(log(n))$ height
 
 **Example:**
+
+```
+              .─.         
+             ( 5 )        
+              `─'         
+               │          
+      ┌────────┴───────┐  
+      │                │  
+     .─.              .─. 
+    ( 2 )            ( 6 )
+     `┬'              `─' 
+  ┌───┴               
+  │                
+ .─.   
+( 1 )  
+ `─'   
+```
+
+#### Full Binary Trees
+
+* Every node of the binary tree has either zero or two children. i.e. no nodes have only one child.
 
 ```
               .─.         
@@ -1093,6 +1264,28 @@ The hight of a complete binary tree is logarithmic to the number of node in the 
  `─'     `─'              
 ```
 
+#### Perfect Binary Trees
+
+* The tree is both full and complete.
+* All leafs are of the same level have the maximum number of nodes.
+
+```
+              .─.                 
+             ( 5 )                
+              `─'                 
+               │                  
+      ┌────────┴───────┐          
+      │                │          
+     .─.              .─.         
+    ( 2 )            ( 8 )        
+     `┬'              `┬'         
+  ┌───┴───┐        ┌───┴───┐      
+  │       │        │       │      
+ .─.     .─.      .─.     .─.     
+( 1 )   ( 4 )    ( 7 )   (10 )    
+ `─'     `─'      `─'     `─'     
+ ```
+
 #### Binary Heaps
 
 * Binary trees where each node in the tree is smaller or larger than all of it's direct children
@@ -1103,9 +1296,7 @@ The hight of a complete binary tree is logarithmic to the number of node in the 
 * **Min Heaps** - when a binary heap is smaller than all of it's direct decedents
 * **Max Heap** - when the binary heap is larger than all of its direct decedents
 
----
-
-## Tries
+#### Tries
 
 A tree-like data structure that implements the dictionary/map/key-value pairs. The word Trie is short for “re**trie**val tree”.
 
